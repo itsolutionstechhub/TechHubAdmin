@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - TechHub</title>
+  <meta name="description" content="Get in touch with TechHub customer support, editorial desk, or repairs team. Send your messages directly.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Area -->
+  <div id="navbar-container"></div>
+
+  <main class="container">
+    <div class="info-page-layout">
+      <div class="info-page-meta">
+        <span>Support Desk</span>
+        <span>&bull;</span>
+        <span>Replies in 24h</span>
+      </div>
+      
+      <!-- Dynamic text from Firestore -->
+      <div class="info-page-content" id="page-content-dynamic"></div>
+
+      <!-- Clean, interactive contact form -->
+      <form class="contact-form" id="contact-support-form" action="#" method="POST">
+        <div class="form-group-row">
+          <div class="contact-field">
+            <label class="contact-label" for="contact-name">Your Name</label>
+            <input type="text" id="contact-name" class="contact-input" placeholder="John Doe" required>
+          </div>
+          <div class="contact-field">
+            <label class="contact-label" for="contact-email">Email Address</label>
+            <input type="email" id="contact-email" class="contact-input" placeholder="john@example.com" required>
+          </div>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="contact-subject">Subject / Inquiry</label>
+          <input type="text" id="contact-subject" class="contact-input" placeholder="Inquiry about item or guide..." required>
+        </div>
+        <div class="contact-field">
+          <label class="contact-label" for="contact-message">Detailed Message</label>
+          <textarea id="contact-message" class="contact-textarea" rows="6" placeholder="Write your message here..." required></textarea>
+        </div>
+        <button type="submit" class="contact-submit" id="btn-submit-contact">Send Message</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Dynamic Footer Area -->
+  <div id="footer-container"></div>
+
+  <script type="module" src="firebase-db.js"></script>
+  <script type="module" src="shared.js"></script>
+  <script type="module">
+    import { showToast } from "./shared.js";
+    
+    document.addEventListener("DOMContentLoaded", () => {
+      // Prefill subject if passing a query parameter (e.g. from Buy Now button)
+      const urlParams = new URLSearchParams(window.location.search);
+      const inquiry = urlParams.get("inquiry");
+      if (inquiry) {
+        const subjectInput = document.getElementById("contact-subject");
+        if (subjectInput) {
+          subjectInput.value = `Purchase inquiry: ${decodeURIComponent(inquiry)}`;
+        }
+      }
+
+      const form = document.getElementById("contact-support-form");
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          
+          // Mimic submitting form - display beautiful feedback
+          const submitBtn = document.getElementById("btn-submit-contact");
+          submitBtn.innerText = "Sending...";
+          submitBtn.disabled = true;
+          
+          setTimeout(() => {
+            showToast("Your message has been sent successfully!", "success");
+            form.reset();
+            submitBtn.innerText = "Send Message";
+            submitBtn.disabled = false;
+          }, 1200);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

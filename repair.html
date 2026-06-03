@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Device Repair Guides - TechHub</title>
+  <meta name="description" content="Professional, step-by-step instructions on repairing mobile phones, laptops, consoles, and smart home appliances. Learn troubleshooting techniques on TechHub.">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Device Repair Guides - TechHub">
+  <meta property="og:description" content="Professional step-by-step device repair manuals and troubleshooting instructions.">
+</head>
+<body>
+
+  <!-- Dynamic Header -->
+  <div id="navbar-container"></div>
+
+  <main class="container">
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-bar-wrapper">
+        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" id="main-search-input" class="search-input" placeholder="Search repair guides...">
+      </div>
+    </section>
+
+    <!-- Posts list -->
+    <section style="margin-top: 20px;">
+      <h2 class="section-title">
+        <span>Repair Tutorials & Manuals</span>
+      </h2>
+      <div class="posts-grid" id="posts-grid-container">
+        <div class="empty-message">
+          <h3>Loading repair articles...</h3>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dynamic Footer -->
+  <div id="footer-container"></div>
+
+  <script type="module" src="firebase-db.js"></script>
+  <script type="module" src="shared.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

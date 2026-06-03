@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal - TechHub</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Header Area -->
+  <div id="navbar-container"></div>
+
+  <main>
+    <!-- 1. LOGIN CARD (Shown when not authenticated) -->
+    <div id="admin-login-section" class="container">
+      <div class="admin-login-wrapper">
+        <h2 class="login-title" id="login-form-title">Admin Login</h2>
+        <p class="login-subtitle" id="login-form-subtitle">Enter credentials to access the administrative dashboard.</p>
+        
+        <!-- First time setup warning placeholder -->
+        <div class="first-time-warning" id="first-time-setup-banner" style="display: none;">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+          <div>
+            <strong>First-Time Setup Detected</strong><br>
+            Use this form to register the initial administrator account. After registration, this option is permanently locked.
+          </div>
+        </div>
+
+        <form id="admin-login-form">
+          <div class="contact-field" style="margin-bottom: 16px;">
+            <label class="contact-label" for="admin-email">Email Address</label>
+            <input type="email" id="admin-email" class="contact-input" placeholder="admin@techhub.com" required>
+          </div>
+          <div class="contact-field" style="margin-bottom: 24px;">
+            <label class="contact-label" for="admin-password">Password</label>
+            <input type="password" id="admin-password" class="contact-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="contact-submit" style="width: 100%;" id="btn-login-submit">Sign In</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2. AUTHENTICATED PANEL (Shown when logged in) -->
+    <div id="admin-dashboard-section" class="admin-panel" style="display: none;">
+      
+      <!-- Side Navigation Menu -->
+      <aside class="admin-sidebar">
+        <div class="admin-menu">
+          <div style="font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 16px; padding: 0 16px;">Control Center</div>
+          
+          <button class="admin-menu-item active" data-target="sec-posts">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+            <span>Manage Posts</span>
+          </button>
+          <button class="admin-menu-item" data-target="sec-categories">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581a1.125 1.125 0 001.59 0l4.318-4.318a1.125 1.125 0 000-1.59l-9.58-9.58a2.25 2.25 0 00-1.591-.659zm5.432 4.5a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"></path></svg>
+            <span>Categories</span>
+          </button>
+          <button class="admin-menu-item" data-target="sec-pages">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125v17.25c0 .621-.504 1.125-1.125 1.125H16.5M3 5.625c0-.621.504-1.125 1.125-1.125h12.75c.621 0 1.125.504 1.125 1.125v17.25c0 .621-.504 1.125-1.125 1.125H4.125C3.5 24 3 23.5 3 22.875V5.625z"></path></svg>
+            <span>Policy Pages</span>
+          </button>
+          <button class="admin-menu-item" data-target="sec-settings">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.43l-1.003.828c-.293.241-.438.613-.43.992a7.723 7.723 0 010 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.43l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.991l-1.004-.827a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.645-.869l.214-1.28z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span>Site Settings</span>
+          </button>
+        </div>
+
+        <button class="admin-menu-item admin-logout" id="btn-admin-logout">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"></path></svg>
+          <span>Sign Out</span>
+        </button>
+      </aside>
+
+      <!-- Main Panel Work Areas -->
+      <section class="admin-content">
+        
+        <!-- SECTION A: POSTS LIST -->
+        <div id="sec-posts" class="admin-section active">
+          <div class="admin-section-header">
+            <div>
+              <h2 style="font-weight: 800; font-size: 26px;">Articles & Catalog</h2>
+              <p style="font-size: 14px; color: var(--text-muted);">View, filter, edit, or delete items on your feed.</p>
+            </div>
+            <button class="admin-btn" id="btn-open-add-post">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path></svg>
+              <span>Add New Post</span>
+            </button>
+          </div>
+
+          <!-- Total Counters Row -->
+          <div class="admin-dashboard-summary">
+            <div class="summary-card">
+              <div class="summary-details">
+                <h4>Total Posts</h4>
+                <p id="stat-total-posts">0</p>
+              </div>
+              <div class="summary-icon">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"></path></svg>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-details">
+                <h4>Store Products</h4>
+                <p id="stat-total-store">0</p>
+              </div>
+              <div class="summary-icon" style="background-color: rgba(236, 72, 153, 0.1); color: var(--secondary);">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+              </div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-details">
+                <h4>Total Reads</h4>
+                <p id="stat-total-views">0</p>
+              </div>
+              <div class="summary-icon" style="background-color: rgba(20, 184, 166, 0.1); color: var(--accent);">
+                <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Posts Table -->
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Article Name</th>
+                  <th>Category</th>
+                  <th>Date Added</th>
+                  <th>Views</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="admin-posts-table-body">
+                <!-- Dynamically injected table rows -->
+                <tr>
+                  <td colspan="5" style="text-align: center; color: var(--text-muted); padding: 40px;">Retrieving posts database...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SECTION B: CATEGORIES MANAGEMENT -->
+        <div id="sec-categories" class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <h2 style="font-weight: 800; font-size: 26px;">Category Management</h2>
+              <p style="font-size: 14px; color: var(--text-muted);">Change page filter categories and renaming handles.</p>
+            </div>
+          </div>
+          
+          <div class="admin-card">
+            <h3 class="admin-card-title">Modify Category Names</h3>
+            <form id="categories-edit-form">
+              <div class="categories-manager-grid" id="categories-list-inputs">
+                <!-- Inputs generated dynamically -->
+              </div>
+              <button type="submit" class="admin-btn" style="margin-top: 24px;" id="btn-save-categories">Save Categories</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECTION C: POLICY PAGES -->
+        <div id="sec-pages" class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <h2 style="font-weight: 800; font-size: 26px;">Policy & Static Content</h2>
+              <p style="font-size: 14px; color: var(--text-muted);">Customize descriptions for your primary informational pages (AdSense prerequisite).</p>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3 class="admin-card-title">Static Page Editors (HTML Supported)</h3>
+            <form id="pages-edit-form">
+              <div class="admin-field" style="margin-bottom: 24px;">
+                <label class="admin-label" for="page-about">About Us Content</label>
+                <textarea id="page-about" class="admin-textarea" rows="8" placeholder="HTML content for About Us page..." required></textarea>
+              </div>
+              <div class="admin-field" style="margin-bottom: 24px;">
+                <label class="admin-label" for="page-contact">Contact Page Banner Info</label>
+                <textarea id="page-contact" class="admin-textarea" rows="4" placeholder="HTML text displayed above contact form..." required></textarea>
+              </div>
+              <div class="admin-field" style="margin-bottom: 24px;">
+                <label class="admin-label" for="page-privacy">Privacy Policy</label>
+                <textarea id="page-privacy" class="admin-textarea" rows="10" placeholder="HTML privacy statements..." required></textarea>
+              </div>
+              <div class="admin-field" style="margin-bottom: 24px;">
+                <label class="admin-label" for="page-terms">Terms & Conditions</label>
+                <textarea id="page-terms" class="admin-textarea" rows="10" placeholder="HTML terms and usage policy..." required></textarea>
+              </div>
+              <div class="admin-field" style="margin-bottom: 24px;">
+                <label class="admin-label" for="page-disclaimer">Disclaimer Statement</label>
+                <textarea id="page-disclaimer" class="admin-textarea" rows="8" placeholder="HTML disclaimer info..." required></textarea>
+              </div>
+              <button type="submit" class="admin-btn" id="btn-save-pages">Save Page Contents</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- SECTION D: SITE CONFIG SETTINGS -->
+        <div id="sec-settings" class="admin-section">
+          <div class="admin-section-header">
+            <div>
+              <h2 style="font-weight: 800; font-size: 26px;">Global Site Settings</h2>
+              <p style="font-size: 14px; color: var(--text-muted);">Manage your site header titles, logos, contacts, and media linkages.</p>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3 class="admin-card-title">Theme Details & Brand Identification</h3>
+            <form id="settings-brand-form">
+              <div class="form-grid">
+                <div class="admin-field">
+                  <label class="admin-label" for="set-site-name">Website Title</label>
+                  <input type="text" id="set-site-name" class="admin-input" placeholder="TechHub" required>
+                </div>
+                <div class="admin-field">
+                  <label class="admin-label" for="set-logo-text">Logo Text Display</label>
+                  <input type="text" id="set-logo-text" class="admin-input" placeholder="TechHub Logo" required>
+                </div>
+                <div class="admin-field form-full-width">
+                  <label class="admin-label" for="set-logo-url">Logo Image Link (Leave blank to use Text Logo)</label>
+                  <input type="text" id="set-logo-url" class="admin-input" placeholder="https://external.com/logo.png">
+                </div>
+                
+                <div class="admin-field">
+                  <label class="admin-label" for="set-email">Inquiry Contact Email</label>
+                  <input type="email" id="set-email" class="admin-input" placeholder="inquiry@techhub.com" required>
+                </div>
+                <div class="admin-field">
+                  <label class="admin-label" for="set-phone">Phone Helpline</label>
+                  <input type="text" id="set-phone" class="admin-input" placeholder="+123456789" required>
+                </div>
+                
+                <div class="admin-field">
+                  <label class="admin-label" for="set-social-fb">Facebook URL</label>
+                  <input type="url" id="set-social-fb" class="admin-input" placeholder="https://facebook.com/techhub">
+                </div>
+                <div class="admin-field">
+                  <label class="admin-label" for="set-social-x">X (Twitter) URL</label>
+                  <input type="url" id="set-social-x" class="admin-input" placeholder="https://x.com/techhub">
+                </div>
+              </div>
+              <button type="submit" class="admin-btn" style="margin-top: 32px;" id="btn-save-settings">Save Branding Details</button>
+            </form>
+          </div>
+        </div>
+
+      </section>
+    </div>
+  </main>
+
+  <!-- 3. DIALOG MODAL (ADD / EDIT POST FORM) -->
+  <div class="modal-backdrop" id="post-editor-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 class="modal-title" id="modal-editor-title">Create New Article</h3>
+        <button class="modal-close" id="btn-close-modal" aria-label="Close dialog">
+          <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      
+      <form id="post-editor-form">
+        <!-- Hidden input for edit item ID -->
+        <input type="hidden" id="edit-post-id" value="">
+        
+        <div class="modal-body">
+          <div class="form-grid">
+            
+            <div class="admin-field">
+              <label class="admin-label" for="post-category">Category</label>
+              <select id="post-category" class="admin-select" required>
+                <option value="tech-news">Tech News</option>
+                <option value="repair-articles">Repair Articles</option>
+                <option value="store">Store</option>
+              </select>
+            </div>
+            
+            <!-- Conditional Price Field (Only active if Category == Store) -->
+            <div class="admin-field" id="post-price-field" style="display: none;">
+              <label class="admin-label" for="post-price">Price ($ USD)</label>
+              <input type="number" step="0.01" min="0" id="post-price" class="admin-input" placeholder="99.99">
+            </div>
+
+            <div class="admin-field form-full-width">
+              <label class="admin-label" for="post-title">Article Title</label>
+              <input type="text" id="post-title" class="admin-input" placeholder="Enter headline title..." required>
+            </div>
+
+            <div class="admin-field form-full-width">
+              <label class="admin-label" for="post-description">Main Description / Body</label>
+              <textarea id="post-description" class="admin-textarea" rows="8" placeholder="Type step by step repair guides or article description here..." required></textarea>
+            </div>
+
+            <!-- Up to 4 image slots uploader -->
+            <div class="admin-field form-full-width">
+              <label class="admin-label">Images Showcase (Add up to 4 files)</label>
+              <div class="image-upload-wrapper">
+                
+                <!-- Box 1 -->
+                <div class="image-upload-box" id="img-box-0">
+                  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Select Image</span>
+                  <input type="file" class="post-img-input" accept="image/*" style="display: none;" id="file-input-0">
+                </div>
+
+                <!-- Box 2 -->
+                <div class="image-upload-box" id="img-box-1">
+                  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Select Image</span>
+                  <input type="file" class="post-img-input" accept="image/*" style="display: none;" id="file-input-1">
+                </div>
+
+                <!-- Box 3 -->
+                <div class="image-upload-box" id="img-box-2">
+                  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Select Image</span>
+                  <input type="file" class="post-img-input" accept="image/*" style="display: none;" id="file-input-2">
+                </div>
+
+                <!-- Box 4 -->
+                <div class="image-upload-box" id="img-box-3">
+                  <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Select Image</span>
+                  <input type="file" class="post-img-input" accept="image/*" style="display: none;" id="file-input-3">
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Alternative Text image fields as a backup option/display -->
+            <div class="admin-field form-full-width" style="margin-top: 10px;">
+              <details style="font-size: 13px; color: var(--text-secondary); cursor: pointer;">
+                <summary>Advanced: Image Links (Manual URLs)</summary>
+                <div class="form-grid" style="margin-top: 10px; border: 1px solid var(--border-color); padding: 16px; border-radius: var(--border-radius-sm);">
+                  <div class="admin-field">
+                    <label class="admin-label">Image 1 URL</label>
+                    <input type="text" id="post-img-url-0" class="admin-input" placeholder="https://...">
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label">Image 2 URL</label>
+                    <input type="text" id="post-img-url-1" class="admin-input" placeholder="https://...">
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label">Image 3 URL</label>
+                    <input type="text" id="post-img-url-2" class="admin-input" placeholder="https://...">
+                  </div>
+                  <div class="admin-field">
+                    <label class="admin-label">Image 4 URL</label>
+                    <input type="text" id="post-img-url-3" class="admin-input" placeholder="https://...">
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="admin-field">
+              <label class="admin-label" for="post-link">Action Link / Buy Link</label>
+              <input type="url" id="post-link" class="admin-input" placeholder="https://shop.com/item-buy">
+            </div>
+            
+            <div class="admin-field">
+              <label class="admin-label" for="post-download">Download File URL</label>
+              <input type="url" id="post-download" class="admin-input" placeholder="https://drive.com/file-download.zip">
+            </div>
+
+          </div>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="admin-btn admin-btn-secondary" id="btn-cancel-modal">Cancel</button>
+          <button type="submit" class="admin-btn" id="btn-save-post">Publish Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="footer-container"></div>
+
+  <!-- Script setup -->
+  <script type="module" src="firebase-db.js"></script>
+  <script type="module" src="shared.js"></script>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Article Viewer - TechHub</title>
+  <meta name="description" content="View full technical articles, download software, get repair guides, or buy gadgets. Dynamic tracking on TechHub.">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Open Graph (Placeholder, updated dynamically) -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Article Detail">
+</head>
+<body>
+
+  <!-- Dynamic Header Area -->
+  <div id="navbar-container"></div>
+
+  <main class="container">
+    <div id="loading-spinner" style="text-align: center; padding: 100px 0; color: var(--text-muted);">
+      <h3>Loading article details...</h3>
+    </div>
+
+    <!-- Article layout container, initially hidden -->
+    <div class="article-layout" id="article-detail-view" style="display: none;">
+      
+      <!-- Left side: Main article detail -->
+      <section class="article-main">
+        <div class="article-header">
+          <!-- Breadcrumbs -->
+          <div class="article-breadcrumbs">
+            <a href="index.html">Home</a>
+            <span>&bull;</span>
+            <span id="breadcrumb-category">Category</span>
+            <span>&bull;</span>
+            <span style="color: var(--text-primary); font-weight: 500;" id="breadcrumb-title">Article</span>
+          </div>
+          
+          <h1 class="article-title" id="detail-title">Samsung Galaxy S24 Ultra Screen Replacement</h1>
+          
+          <div class="article-meta-bar">
+            <div class="article-meta-left">
+              <span class="article-category-badge" id="detail-badge">Category</span>
+              <div class="article-meta-group">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span id="detail-date">June 3, 2026</span>
+              </div>
+            </div>
+            <div class="article-meta-group" style="background-color: var(--bg-surface-elevated); padding: 6px 14px; border-radius: 50px; font-weight: 600; color: var(--text-primary);">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+              <span id="detail-views">0 views</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slideshow of up to 4 images -->
+        <div class="article-slideshow" id="detail-slideshow-container">
+          <div id="slideshow-wrapper">
+            <!-- Dynamic slide divs will be injected here -->
+          </div>
+          <div class="article-slideshow-nav" id="slideshow-controls">
+            <button class="slideshow-arrow" id="prev-slide" aria-label="Previous image">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button class="slideshow-arrow" id="next-slide" aria-label="Next image">
+              <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+          <div class="slideshow-indicators" id="slideshow-dots"></div>
+        </div>
+
+        <!-- Article text body -->
+        <div class="article-body" id="detail-body">
+          <!-- Text and details -->
+        </div>
+      </section>
+
+      <!-- Right side: Actions / Links -->
+      <aside class="article-sidebar">
+        <!-- Store pricing widget -->
+        <div class="sidebar-widget" id="store-widget" style="display: none;">
+          <h4 class="widget-title">Purchase Details</h4>
+          <div class="widget-price-tag" id="widget-price">$0.00</div>
+          <a class="widget-btn widget-btn-primary" id="widget-buy-btn" href="#" target="_blank">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+            <span>Buy Now</span>
+          </a>
+        </div>
+
+        <!-- Download widget -->
+        <div class="sidebar-widget" id="download-widget" style="display: none;">
+          <h4 class="widget-title">Download Center</h4>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">Download direct files, tools, custom ROMs, schematic diagrams, or utility software linked with this article.</p>
+          <a class="widget-btn widget-btn-primary" id="widget-download-btn" href="#" download target="_blank">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <span>Download Files</span>
+          </a>
+        </div>
+
+        <!-- Resource widget -->
+        <div class="sidebar-widget" id="link-widget" style="display: none;">
+          <h4 class="widget-title">Related Link</h4>
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">Visit official references, schematics database, source threads, or vendor specifications for this topic.</p>
+          <a class="widget-btn widget-btn-secondary" id="widget-link-btn" href="#" target="_blank">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            <span>Visit Reference</span>
+          </a>
+        </div>
+
+        <!-- Share widgets -->
+        <div class="sidebar-widget">
+          <h4 class="widget-title">Share Article</h4>
+          <div class="social-share-grid">
+            <button class="share-btn share-fb" id="share-facebook" aria-label="Share on Facebook">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+              <span>FB</span>
+            </button>
+            <button class="share-btn share-wa" id="share-whatsapp" aria-label="Share on WhatsApp">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.727-1.458L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.859-4.42 9.863-9.864.002-2.637-1.019-5.117-2.877-6.979C16.598 1.9 14.12 1.88 12.008 1.88c-5.437 0-9.86 4.418-9.863 9.864-.001 1.73.457 3.418 1.323 4.908l-.994 3.634 3.72-.975zm11.006-7.466c-.29-.146-1.727-.852-1.993-.95-.267-.097-.461-.146-.656.146-.195.293-.755.95-.926 1.146-.171.196-.341.22-.63.073-.29-.147-1.228-.452-2.339-1.443-.864-.771-1.447-1.723-1.617-2.015-.171-.29-.018-.448.127-.593.13-.13.29-.34.436-.51.145-.17.194-.29.29-.485.097-.194.048-.364-.025-.51-.073-.146-.656-1.58-.9-2.164-.236-.57-.478-.49-.656-.499-.17-.008-.365-.01-.56-.01-.196 0-.518.073-.79.364-.271.291-1.04 1.018-1.04 2.482 0 1.465 1.066 2.88 1.212 3.074.146.194 2.099 3.2 5.08 4.494.71.308 1.262.493 1.693.63.714.227 1.365.195 1.88.117.573-.085 1.728-.705 1.972-1.383.244-.679.244-1.262.17-1.383-.074-.12-.27-.193-.561-.34z"/></svg>
+              <span>WhatsApp</span>
+            </button>
+            <button class="share-btn share-x" id="share-twitter" aria-label="Share on X">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              <span>X</span>
+            </button>
+          </div>
+        </div>
+      </aside>
+      
+    </div>
+  </main>
+
+  <!-- Dynamic Footer Area -->
+  <div id="footer-container"></div>
+
+  <script type="module" src="firebase-db.js"></script>
+  <script type="module" src="shared.js"></script>
+  <script type="module" src="article.js"></script>
+</body>
+</html>

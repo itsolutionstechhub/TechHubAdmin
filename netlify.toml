@@ -1,0 +1,20 @@
+# Netlify configuration file for TechHub website
+# Configures the publish folder and adds essential security headers for AdSense approval
+
+[build]
+  publish = "."
+
+# Rules to ensure security and cache policies
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+# Clean URLs setup (removes .html from display in browser but redirects correctly)
+[gatsbylike]
+  # Netlify has a native settings for clean URLs called "Pretty URLs" 
+  # which can be toggled on Netlify dashboard.

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechHub - Latest Tech News, Repair Guides & Store</title>
+  <meta name="description" content="Your dynamic portal for step-by-step device repair manuals, tech news updates, software downloads, and premium gadgets store. Connect with the latest tech.">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Open Graph / SEO -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="TechHub - Latest Tech News, Repair Guides & Store">
+  <meta property="og:description" content="Get premium guides, news, downloads and products directly at TechHub. Dynamic live sync.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop">
+</head>
+<body>
+
+  <!-- Dynamic Header Area -->
+  <div id="navbar-container"></div>
+
+  <main class="container">
+    <!-- Featured Article Slideshow -->
+    <section class="hero-slideshow" id="featured-slideshow">
+      <div class="slide-track" id="slideshow-track">
+        <!-- Dynamically loaded slides will go here -->
+        <div style="display: flex; height: 100%; width: 100%; align-items: center; justify-content: center; background-color: var(--bg-surface);">
+          <div style="color: var(--text-muted);">Loading featured articles...</div>
+        </div>
+      </div>
+      <div class="slideshow-nav" id="slideshow-navigation"></div>
+    </section>
+
+    <!-- Search & Filter Controls -->
+    <section class="search-section">
+      <div class="search-bar-wrapper">
+        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" id="main-search-input" class="search-input" placeholder="Search news, repair articles, downloads, store products...">
+      </div>
+      <div class="filters-wrapper" id="category-filters-container">
+        <button class="filter-chip active" data-category="all" id="filter-all">All Articles</button>
+        <button class="filter-chip" data-category="tech-news" id="filter-news">Tech News</button>
+        <button class="filter-chip" data-category="repair-articles" id="filter-repair">Repair Articles</button>
+        <button class="filter-chip" data-category="store" id="filter-store">Store</button>
+      </div>
+    </section>
+
+    <!-- Grid of Articles -->
+    <section>
+      <h2 class="section-title">
+        <span id="feed-heading-title">Recent Feed</span>
+      </h2>
+      <div class="posts-grid" id="posts-grid-container">
+        <!-- Dynamically loaded post cards will go here -->
+        <div class="empty-message" style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center;">
+          <div style="color: var(--text-muted); font-size: 16px;">Loading feed articles...</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dynamic Footer Area -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="firebase-db.js"></script>
+  <script type="module" src="shared.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
