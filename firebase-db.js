@@ -25,12 +25,6 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { 
-  getStorage, 
-  ref, 
-  uploadBytes, 
-  getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
 // User's Firebase Configuration
 const firebaseConfig = {
@@ -47,8 +41,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app);
-storage.maxUploadRetryTime = 10000; // 10 seconds max retry timeout for uploads
 
 // -------------------------------------------------------------
 // Authentication Wrapper Functions
@@ -227,16 +219,30 @@ export async function incrementViews(id) {
 // -------------------------------------------------------------
 // Storage Wrapper Functions
 // -------------------------------------------------------------
-
 export async function uploadImageFile(file) {
   try {
-    const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-    const storageRef = ref(storage, `posts/${fileName}`);
-    const snapshot = await uploadBytes(storageRef, file);
-    const downloadURL = await getDownloadURL(snapshot.ref);
-    return downloadURL;
+    const formData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", "techhub_upload");
+
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/dn2yrgpud/image/upload",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error?.message || "Image upload failed");
+    }
+
+    return data.secure_url;
   } catch (error) {
-    console.error("Error uploading file to storage:", error);
+    console.error("Cloudinary upload error:", error);
     throw error;
   }
 }
