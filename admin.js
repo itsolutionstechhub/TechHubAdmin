@@ -24,7 +24,6 @@ import { formatDate } from "./app.js";
 
 // Global variables for dashboard state
 let adminRegistered = true;
-let isFirstTimeSetup = false;
 let dbPosts = [];
 let editPostId = "";
 
@@ -41,11 +40,17 @@ async function initAdminPortal() {
   adminRegistered = await checkIfAdminRegistered();
   
   if (!adminRegistered) {
-    isFirstTimeSetup = true;
-    document.getElementById("first-time-setup-banner").style.display = "flex";
-    document.getElementById("login-form-title").innerText = "First-Time Admin Setup";
-    document.getElementById("login-form-subtitle").innerText = "Create the master administrator account. This will lock setup.";
-    document.getElementById("btn-login-submit").innerText = "Register Administrator";
+    console.log("Setting up default admin account: admin@techhub.com / admin123");
+    try {
+      // Silently register default administrator in the background
+      await registerFirstAdmin("admin@techhub.com", "admin123");
+      await markAdminAsRegistered();
+      console.log("Default admin account registered successfully!");
+    } catch (error) {
+      console.log("Admin registration skipped or user already exists:", error.message);
+      // Always mark as registered to avoid re-triggering this operation
+      await markAdminAsRegistered();
+    }
   }
 
   // Monitor auth state changes
@@ -85,30 +90,21 @@ function setupLoginListener() {
     const password = document.getElementById("admin-password").value;
     const submitBtn = document.getElementById("btn-login-submit");
 
-    submitBtn.innerText = isFirstTimeSetup ? "Registering..." : "Signing In...";
+    submitBtn.innerText = "Signing In...";
     submitBtn.disabled = true;
 
     try {
-      if (isFirstTimeSetup) {
-        // Create first admin user
-        await registerFirstAdmin(email, password);
-        await markAdminAsRegistered();
-        isFirstTimeSetup = false;
-        showToast("Administrator registered successfully!", "success");
-      } else {
-        // Normal login
-        await loginAdmin(email, password);
-        showToast("Signed in successfully!", "success");
-      }
+      // Normal login
+      await loginAdmin(email, password);
+      showToast("Signed in successfully!", "success");
     } catch (error) {
       console.error("Authentication failed:", error);
       let errMsg = "Authentication failed. Check details.";
-      if (error.code === "auth/weak-password") errMsg = "Password should be at least 6 characters.";
       if (error.code === "auth/invalid-email") errMsg = "Invalid email format.";
-      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") errMsg = "Incorrect email or password.";
+      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found" || error.code === "auth/invalid-credential") errMsg = "Incorrect email or password.";
       showToast(errMsg, "danger");
     } finally {
-      submitBtn.innerText = isFirstTimeSetup ? "Register Administrator" : "Sign In";
+      submitBtn.innerText = "Sign In";
       submitBtn.disabled = false;
     }
   });
