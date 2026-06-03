@@ -48,6 +48,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
+storage.maxUploadRetryTime = 10000; // 10 seconds max retry timeout for uploads
 
 // -------------------------------------------------------------
 // Authentication Wrapper Functions
